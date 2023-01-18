@@ -1,27 +1,27 @@
 export const transactions = [
 	{
-		id: 0,
+		id: 1,
 		name: 'holiday',
 		amount: 1200,
 		type: 'expense',
 		createdAt: '2023-01-12',
 	},
 	{
-		id: 1,
+		id: 2,
 		name: 'mdi pay',
 		amount: 6000,
 		type: 'income',
 		createdAt: '2023-01-15',
 	},
 	{
-		id: 2,
+		id: 3,
 		name: 'bike mantainance',
 		amount: 200,
 		type: 'expense',
 		createdAt: '2023-01-15',
 	},
 	{
-		id: 3,
+		id: 4,
 		name: 'cash power',
 		amount: 200,
 		type: 'expense',
@@ -32,9 +32,16 @@ export const transactions = [
 export const users = [
 	{
 		id: 1,
-    username: 'ebrima',
+		username: 'ebrima 2ray',
 		password: '1234',
 		role: 'admin',
-		status: 'active'
-  }
+		status: 'active',
+	},
+	{
+		id: 2,
+		username: 'alieu saidy',
+		password: '1234',
+		role: 'user',
+		status: 'active',
+	},
 ]
