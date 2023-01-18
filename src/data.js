@@ -11,21 +11,21 @@ export const transactions = [
 		name: 'mdi pay',
 		amount: 6000,
 		type: 'income',
-		createdAt: '2023-01-15',
+		createdAt: '2023-01-06',
 	},
 	{
 		id: 3,
 		name: 'bike mantainance',
 		amount: 200,
 		type: 'expense',
-		createdAt: '2023-01-15',
+		createdAt: '2023-01-10',
 	},
 	{
 		id: 4,
 		name: 'cash power',
 		amount: 200,
 		type: 'expense',
-		createdAt: '2023-01-15',
+		createdAt: '2023-01-03',
 	},
 ]
 
