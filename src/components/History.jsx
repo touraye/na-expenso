@@ -1,8 +1,6 @@
 import { currencyFormat } from '../helpers'
 import {FaBusinessTime} from 'react-icons/fa'
-export const History = ( { transaction } ) => {
-  // const trans = transaction?.map( trans => trans )    
-  // const lastTran = trans[ 0 ]
+export const History = ( { transaction } ) => {	
   
   return (
 		<div className='history'>
