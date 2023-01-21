@@ -5,21 +5,20 @@ import Pagination from './Pagination'
 import { getUsers } from '../../store/features/user/userSlice'
 
 const UserPagination = () => {
-	const { users } = useSelector(
-		(state) => state.user
+	const { user } = useSelector(
+		(state) => state
 	)	
+	console.log('@p', user);
 	const dispatch = useDispatch()
-
-	const [user, setUser] = useState([])
+	
 	const [currentPage, setCurrentPage] = useState(1)
 	const [usersPerPage] = useState(5)
 
 	useEffect(() => {
 		// if (user.length <= 0) {
 		// }
-		dispatch(getUsers())
-		setUser(users)
-	}, [dispatch, users,])
+		dispatch(getUsers())		
+	}, [dispatch, user,])
 
 	// Get current user
 	const indexOfLastUser = currentPage * usersPerPage

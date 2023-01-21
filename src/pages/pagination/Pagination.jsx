@@ -12,7 +12,7 @@ export default function Pagination({
 				<p className='d-flex gap-1'>
 					Showing
 					<span className='font-medium'>
-						<strong>{currentPage * dataPerPage - 5}</strong>
+						<strong>{currentPage * dataPerPage - 3}</strong>
 					</span>
 					to
 					<span className='font-medium'>

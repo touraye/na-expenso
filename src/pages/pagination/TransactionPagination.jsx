@@ -5,22 +5,19 @@ import Pagination from './Pagination'
 import { getTransactions } from '../../store/features/transaction/transactionSlice'
 
 const TransactionPagination = () => {
-	const { transactions, } = useSelector((state) => state.transaction
-	)
-	console.log('transactions', transactions)
+	const { transaction, } = useSelector((state) => state
+	)	
 	const dispatch = useDispatch()
-
-	const [transaction, setTransaction] = useState([])
+	
 	const [currentPage, setCurrentPage] = useState(1)
-	const [transPerPage] = useState(5)
+	const [transPerPage] = useState(4)
 
 	useEffect(() => {
 
 		if (transaction.length <= 0) {
 			dispatch(getTransactions())
-		}
-		setTransaction(transactions)
-	}, [dispatch, transactions, transaction.length])
+		}		
+	}, [dispatch, transaction.length])
 
 	// Get current transaction
 	const indexOfLastTrans = currentPage * transPerPage
