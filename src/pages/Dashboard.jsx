@@ -1,25 +1,63 @@
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import {FaPlus} from 'react-icons/fa'
 import AddTransaction from '../components/AddTransaction'
 import { History } from '../components/History'
-import { getTransactions } from '../store/features/transaction/transactionSlice'
-import { curr, currencyFormat } from '../helpers'
+import {
+	curr,
+	currencyFormat,
+	monthlyExpense,
+	getMonthlyMinIncome,
+	getMonthlyMinExpense,
+	getMonthlyMaxIncome,
+	getMonthlyMaxExpense,
+	getMonthlyIncomeAverage,
+	getMonthlyExpenseAverage,
+	getMonthlyIncome,
+	getMonthlyExpense,
+	getYearlyIncome,
+	getYearlyyExpense,
+} from '../helpers'
+import IncomeAndExpenseDetail from '../components/IncomeAndExpenseDetail'
+import { addTransaction, getTransactions } from '../store/features/transaction/transactionSlice'
+import { useDispatch, useSelector } from 'react-redux'
 const Dashboard = () => {
+	const { transaction } = useSelector( ( state ) => state )
+	console.log(transaction[0]);
+	const dispatch = useDispatch()	
 	const [ modal, setModal ] = useState( false )	
-	const { transactions } = useSelector((state) => state.transaction) 	
-	const dispatch = useDispatch()
-	const historyData = transactions[ 0 ]	
+		
+	const historyData = transaction[transaction.length - 1]	
 	
-	useEffect( () => {	
-		dispatch(getTransactions())
+	useEffect(() => {		
+		
+		dispatch( getTransactions())
 	}, [ dispatch ] )
-
-	const totalIncome = curr(transactions)[0]
-	const totalBalance = curr(transactions)[1]
-	const totalExpense = curr( transactions )[ 2 ]		
 	
-  
+	const onAdd = ( data ) => {
+		dispatch(addTransaction(data))						
+	}
+
+	monthlyExpense(transaction)
+	const totalIncome = curr(transaction)[0]
+	const totalBalance = curr(transaction)[1]
+	const totalExpense = curr( transaction )[ 2 ]		
+
+	const monthlyMinIncome =  getMonthlyMinIncome()
+	const monthlyMinExpense = getMonthlyMinExpense()
+
+	const monthlyMaxIncome = getMonthlyMaxIncome()
+	const monthlyMaxExpense = getMonthlyMaxExpense()
+
+	const monthlyIncomeAverage = getMonthlyIncomeAverage()
+	const monthlyExpenseAverage = getMonthlyExpenseAverage()
+
+	const monthlyIncome = getMonthlyIncome()
+	const monthlyExpenses = getMonthlyExpense()
+
+	const yearlyIncome = getYearlyIncome(transaction)
+	const yearlyExpenses = getYearlyyExpense(transaction)
+	
+	  
 	return (
 		<div className='dashboard'>
 			<h4 className='balance-text'>your balance</h4>
@@ -42,27 +80,42 @@ const Dashboard = () => {
 			</div>
 			<History transaction={historyData} />
 			<div className='dashboard-stats'>
-				<h4>Min Monthly Transaction</h4>
-				<p>GMD 300.00</p>
+				<IncomeAndExpenseDetail
+					heading='Min Monthly Transaction'
+					income={monthlyMinIncome}
+					expense={monthlyMinExpense}
+				/>
 			</div>
 			<div className='dashboard-stats'>
-				<h4>Max Monthly Transaction</h4>
-				<p>GMD 1,200.00</p>
+				<IncomeAndExpenseDetail
+					heading='Max Monthly Transaction'
+					income={monthlyMaxIncome}
+					expense={monthlyMaxExpense}
+				/>
 			</div>
 			<div className='dashboard-stats'>
-				<h4>Average Monthly Transaction</h4>
-				<p>GMD 550.00</p>
+				<IncomeAndExpenseDetail
+					heading='Average Monthly Transaction'
+					income={monthlyIncomeAverage}
+					expense={monthlyExpenseAverage}
+				/>
 			</div>
-			<div className='dashboard-stats'>
-				<h4>Monthly Transaction</h4>
-				<p>GMD 1,200.00</p>
+			<div className='dashboard-stats'>				
+				<IncomeAndExpenseDetail
+					heading='Monthly Transaction'
+					income={monthlyIncome}
+					expense={monthlyExpenses}
+				/>
 			</div>
-			<div className='dashboard-stats'>
-				<h4>Yearly Monthly Transaction</h4>
-				<p>GMD 1,200.00</p>
+			<div className='dashboard-stats'>				
+				<IncomeAndExpenseDetail
+					heading='Yearly Transaction'
+					income={yearlyIncome}
+					expense={yearlyExpenses}
+				/>
 			</div>
 			{modal && (
-				<AddTransaction modal={modal} setModal={setModal} data={transactions} />
+				<AddTransaction modal={modal} setModal={setModal} onAddTransaction={onAdd} />
 			)}
 			{modal ? (
 				''
