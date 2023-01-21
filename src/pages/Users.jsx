@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
 	getUsers,
-	deleteUser,
 	createUser,
 	removeUser,
 } from '../store/features/user/userSlice'
@@ -12,7 +10,7 @@ import User from '../components/User'
 import { FaPlus } from 'react-icons/fa'
 
 const Users = ({userData}) => {	
-	const { auth } = useSelector( ( state ) => state )
+	
 	// console.log('auth', auth)
 	const dispatch = useDispatch()
 	
