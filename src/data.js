@@ -27,6 +27,13 @@ export const transactions = [
 		type: 'expense',
 		createdAt: '2023-01-03',
 	},
+	{
+		id: 5,
+		name: 'pay',
+		amount: 3000,
+		type: 'income',
+		createdAt: '2023-01-19',
+	},
 ]
 
 export const users = [
