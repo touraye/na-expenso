@@ -4,19 +4,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
 	getUsers,
 	deleteUser,
-	updateUser,
+	createUser,
+	removeUser,
 } from '../store/features/user/userSlice'
 import AddUser from '../components/AddUser'
 import User from '../components/User'
 import { FaPlus } from 'react-icons/fa'
 
-const Users = ({userData}) => {
-	const { users } = useSelector( ( state ) => state.user )  
+const Users = ({userData}) => {	
 	const { auth } = useSelector( ( state ) => state )
-	console.log('auth', auth)
+	// console.log('auth', auth)
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
-  const [ user, setUser ] = useState( [] )  
+	
 	const [ showForm, setShowForm ] = useState( false ) 	
 	const [showEditForm, setShowEditForm] = useState(false)	
 	const showEdit = ()=> setShowEditForm(!showEditForm)
@@ -29,12 +28,11 @@ const Users = ({userData}) => {
 	const onShowForm = () => setShowForm( !showForm )
 	
 	const onAdd = ( data ) => {	
-		dispatch(getUsers())     						
+		dispatch(createUser(data))     						
 	}	
 	
 	const onDelete = (id) => {
-		dispatch( deleteUser( id ) )				    
-		dispatch(getUsers())     
+		dispatch( removeUser( id ) )				    		    
 	}	    
   
   return (
@@ -51,7 +49,7 @@ const Users = ({userData}) => {
 							key={user.id}
 							user={user}
 							onDelete={onDelete}
-							// foundUser={foundUser}
+							// foundUser={foundUser}createUser
 							showEdit={showEdit}
 						/>
 					))

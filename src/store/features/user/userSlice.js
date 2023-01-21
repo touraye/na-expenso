@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {users} from '../../../data'
 
-const initialState = {
-	users: users,
-}
+const initialState = users
+
 
 const userSlice = createSlice({
-	name: 'user',
+	name: 'users',
 	initialState,
 	reducers: {
 		setUser(state, action) {
@@ -15,11 +14,40 @@ const userSlice = createSlice({
 		getUsers(state, action) {
 			return state
 		},
-		updateUser(state, action) {},
-		deleteUser(){},
+		appendUser(state, action) {
+			state.push(action.payload)
+		},
+		updateUser( state, action ) {
+			const id = action.payload.id
+			const updateUser = action.payload
+			return state.map((user) => user.id !== id ? user : updateUser)
+		},
+		deleteUser( state, action ) {
+			const id = action.payload
+			const updatedUser = state.filter( user => user.id !== id )
+			return state = updatedUser
+		},
 	},
 })
 
-export const { setUser, getUsers, updateUser, deleteUser } = userSlice.actions
+export const { setUser, getUsers,appendUser, updateUser, deleteUser } = userSlice.actions
+
+export const createUser = ( data ) => {	
+	return dispatch => {
+		dispatch(appendUser(data))
+	}
+}
+
+export const removeUser = ( id ) => {	
+	return dispatch => {
+		dispatch(deleteUser(id))
+	}
+}
+
+export const editUser = ( data )=>{
+	return dispatch => {
+		dispatch(updateUser(data))
+	}
+}
 
 export default userSlice.reducer

@@ -20,18 +20,19 @@ const EditTransaction = ( { transaction, handleShowEditForm } ) => {
 
       if (type.length === 0) {
         return alert('Please select type')
-      }
-      
-      const transactionData = {
-        id: transaction.id,
-        name,
-        type,
-        amount,
-      }
+			}
+			
+			const createdAt = new Date().toISOString().substring(0, 10)     
 
-      dispatch( updateTransaction( transactionData ) )	
-			navigate('/transactions')
-			dispatch( getTransactions() )
+      dispatch(
+				updateTransaction({
+					id: transaction.id,
+					name,
+					type,
+					amount: Number(amount),
+					createdAt,
+				})
+			)							
       handleShowEditForm()
 		}
 	

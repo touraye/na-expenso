@@ -18,7 +18,14 @@ const AddUser = ({ onAdd, onShowForm }) => {
 			return alert('Password do not match')
 		}
 
-		onAdd({ username, password, role })
+		const generateId = () => {
+			let randomId = Math.floor(Math.random() * 1000)
+			return randomId
+		}
+
+		const status = 'active'
+
+		onAdd({id: generateId(), username, password, role, status })
 		onShowForm()
 	}
 
