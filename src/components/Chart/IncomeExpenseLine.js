@@ -5,17 +5,17 @@ import {curr} from '../../helpers'
 import LineChart from './LineChart'
 
 const IncomeExpenseLine = () => {
-	const { transactions} = useSelector(
-		(state) => state.transaction
+	const { transaction} = useSelector(
+		(state) => state
 	)
-	console.log('transactions', transactions)
+	console.log('transaction', transaction)
   const dispatch = useDispatch()
   
   useEffect(() => {
     dispatch(getTransactions)
   }, [ dispatch ] )
   
-  const incomeAndExpense = curr(transactions)
+  const incomeAndExpense = curr(transaction)
 
 	const chartData = {
 		labels: ['income', 'balance', 'expense'],

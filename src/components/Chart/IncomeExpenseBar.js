@@ -5,18 +5,16 @@ import { curr } from '../../helpers'
 import { BarChart } from './Chart'
 
 const IncomeExpenseBar = () => {
-  const { transactions, isLoading, isMessage, isError } = useSelector( ( state ) => state.transaction )
+  const { transaction } = useSelector( ( state ) => state )
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (isError) {
-      alert(isMessage)
-    }
+  
 
     dispatch(getTransactions)
-  }, [ dispatch, isError, isMessage ] )
+  }, [ dispatch] )
   
-  const incomeAndExpense = curr(transactions)
+  const incomeAndExpense = curr(transaction)
 
   const chartData = {
 		labels: ['income', 'balance', 'expense'],
@@ -33,9 +31,7 @@ const IncomeExpenseBar = () => {
         borderWidth: 2,
 			},
 		],
-	}
-  
-  if(isLoading) <h2>...loading</h2>
+	}    
 
   return <BarChart chartData={chartData} />
 }

@@ -6,7 +6,7 @@ import { monthlyExpense } from '../../helpers'
 import { BarChart } from './Chart'
 
 const MonthlyTransaction = () => {
-  const { transactions } = useSelector( ( state ) => state.transaction )
+  const { transaction } = useSelector( ( state ) => state )
   const dispatch = useDispatch( )
   
   useEffect( () => {    
@@ -15,7 +15,7 @@ const MonthlyTransaction = () => {
   
   
   
-  const transactionOfTheMonth = monthlyExpense( transactions )
+  const transactionOfTheMonth = monthlyExpense( transaction )
   
 
     const chartData = {

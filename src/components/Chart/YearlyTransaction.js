@@ -5,7 +5,7 @@ import { getTransactions } from '../../store/features/transaction/transactionSli
 import PieChart from './PieChart'
 
 const YearlyTransaction = () => {
-  const { transactions } = useSelector( ( state ) => state )
+  const { transaction } = useSelector( ( state ) => state )
   const dispatch = useDispatch()
   
   useEffect( () => {    
