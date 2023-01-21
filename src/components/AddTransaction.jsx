@@ -1,45 +1,40 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createTransaction, getTransactions } from '../store/features/transaction/transactionSlice'
-import { addTransaction } from '../helpers'
+import { addTransaction, createTransaction, getTransactions } from '../store/features/transaction/transactionSlice'
 import { FaTimes } from 'react-icons/fa'
-const AddTransaction = ({modal, setModal,data}) => {
-	const {transactions} = useSelector((state)=> state.transaction)
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
-  const[name,setName]=useState('')
-  const[type,setType]=useState('')
-  const [ amount, setAmount ] = useState( '' )
-  
-  const onSubmit = (e) => {
-    e.preventDefault()
+const AddTransaction = ({ modal, setModal, onAddTransaction }) => {
+	const { transactions } = useSelector((state) => state.transaction)	
+	const [name, setName] = useState('')
+	const [type, setType] = useState('')
+	const [amount, setAmount] = useState('')
 
-    if ( type.length === 0 ) {
-      return alert('Please select type')
+	const onSubmit = (e) => {
+		e.preventDefault()
+
+		if (type.length === 0) {
+			return alert('Please select type')
 		}
-		
-		const generateId = ( state ) => {
-			let randomId = Math.floor( Math.random() * 1000)		
+
+		const generateId = (state) => {
+			let randomId = Math.floor(Math.random() * 1000)
 			return randomId
 		}
 
-		const createdAt = new Date()
+		const createdAt = new Date().toISOString().substring(0, 10)
 
-		let id = generateId(transactions)
-		
-		dispatch( createTransaction( { id, name, type, amount } ) )
-		
-		Object.assign({}, { id, name, type, amount }, ...transactions)
-		
-		dispatch(getTransactions())
+		let id = generateId( transactions )				
+
+		onAddTransaction({ id, name, type, amount: Number(amount), createdAt })
 		setName('')
 		setType('')
-		setAmount('')
-  }
+		setAmount( '' )
+		setModal(!modal)
+	}
 
 	return (
-		<form className='form transaction-form modal modal-add-form' onSubmit={onSubmit}>
+		<form
+			className='form transaction-form modal modal-add-form'
+			onSubmit={onSubmit}>
 			<div className='close-btn-container'>
 				<FaTimes className='close-btn' onClick={() => setModal(!modal)} />
 			</div>
