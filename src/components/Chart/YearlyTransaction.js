@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { getTransactions } from '../../store/features/transaction/transactionSlice'
 import PieChart from './PieChart'
 
-const YearlyTransaction = () => {
-  const { transaction } = useSelector( ( state ) => state )
+const YearlyTransaction = () => {  
   const dispatch = useDispatch()
   
   useEffect( () => {    
