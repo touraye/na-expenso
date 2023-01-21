@@ -1,12 +1,10 @@
 import { useState } from "react"
-import {useNavigate} from "react-router-dom"
 import { FaTimes } from "react-icons/fa"
 import { useDispatch } from "react-redux"
-import {getTransactions, updateTransaction} from '../store/features/transaction/transactionSlice'
+import { updateTransaction} from '../store/features/transaction/transactionSlice'
 
 const EditTransaction = ( { transaction, handleShowEditForm } ) => {
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+	const dispatch = useDispatch()	
 		const [name, setName] = useState(transaction.name)
 		const [type, setType] = useState(transaction.type)
 		const [amount, setAmount] = useState(transaction.amount)

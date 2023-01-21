@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addTransaction, createTransaction, getTransactions } from '../store/features/transaction/transactionSlice'
+import { useSelector } from 'react-redux'
 import { FaTimes } from 'react-icons/fa'
 const AddTransaction = ({ modal, setModal, onAddTransaction }) => {
 	const { transactions } = useSelector((state) => state.transaction)	

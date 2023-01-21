@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setLogin } from '../store/features/auth/authSlice'
-import {getUsers} from '../store/features/user/userSlice'
 
 const Login = () => {
 	const {users} = useSelector((state)=> state)

@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import EditTransaction from './EditTransaction'
 import {currencyFormat} from '../helpers'
 
-const Transaction = ( {tran, onDelete} ) => {
-  const {auth} = useSelector((state)=>state)
+const Transaction = ( {tran, onDelete} ) => {  
   const [showEditForm, setshowEditForm] = useState(false)
 
 	const handleShowEditForm = () => setshowEditForm( !showEditForm )
